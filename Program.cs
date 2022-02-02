@@ -51,13 +51,13 @@ namespace demilis {
                     }
                     catch
                     {
-                        Write.Error($"{Environment.GetCommandLineArgs().GetValue(indexOfHostArg + 1)} is not a valid IP");
+                        Write.Error($"{Environment.GetCommandLineArgs().GetValue(indexOfHostArg + 1)} is not a valid IPv4 address");
                         return;
                     }
                 }
                 else
                 {
-                    Write.Error("Pleace specify a valid IP after the host argument");
+                    Write.Error("Pleace specify a valid IPv4 address after the host argument");
                     return;
                 }
             }
@@ -118,7 +118,9 @@ namespace demilis {
 
             Dictionary<int, Socket> dictionary = new Dictionary<int, Socket>();
             int socketNumber = 0;
-            // ArrayList sockets = new ArrayList();
+            
+
+
             while (true)
             {
                 try

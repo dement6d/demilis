@@ -13,7 +13,7 @@ namespace demilis
         public ArgManager()
         {
             arguments.Add(new Argument("help", "Shows this page"));
-            arguments.Add(new Argument("host", "Set the local IP to listen on", "h"));
+            arguments.Add(new Argument("host", "Set the local IPv4 address to listen on", "h"));
             arguments.Add(new Argument("port", "Set the PORT to listen on", "p"));
             arguments.Add(new Argument("verbose", "Specify this argument if you wish for demilis to print more output information", "v"));
         }
