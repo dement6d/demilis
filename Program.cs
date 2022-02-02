@@ -1,5 +1,6 @@
 ﻿using demilis;
 using System.Collections;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 
@@ -10,11 +11,6 @@ namespace demilis {
             string ipInput = "0.0.0.0";
             IPAddress ip;
             ushort port = 80;
-
-            for (int i = 0; i < args.Length; i++)
-            {
-                Console.WriteLine(args.GetValue(i));
-            }
 
             if (Environment.GetCommandLineArgs().Contains("--help") || Environment.GetCommandLineArgs().Length <= 2)
             {
@@ -121,14 +117,17 @@ namespace demilis {
             }
             Console.WriteLine($"Listening for incoming TCP connections on {System.Net.IPAddress.Parse(ipInput)}:{port}");
 
-            ArrayList sockets = new ArrayList();
+            Dictionary<int, Socket> dictionary = new Dictionary<int, Socket>();
+            int socketNumber = 0;
+            // ArrayList sockets = new ArrayList();
             while (true)
             {
                 try
                 {
                     Socket socket = listener.AcceptSocket();
-                    sockets.Add(socket);
                     Console.WriteLine($"{socket.RemoteEndPoint} connected");
+                    dictionary.Add(socketNumber, socket);
+                    socketNumber++;
                 }
                 catch (Exception e)
                 {
@@ -136,7 +135,6 @@ namespace demilis {
                     Write.Error(toWrite);
                 }
             }
-
         }
     }
 }
