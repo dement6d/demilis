@@ -8,7 +8,7 @@ string ipInput = "127.0.0.1";
 IPAddress ip;
 ushort port = 80;
 
-if (Environment.GetCommandLineArgs().Contains("--help") || Environment.GetCommandLineArgs().Contains("help") && Environment.GetCommandLineArgs().Length <= 2)
+if (Environment.GetCommandLineArgs().Contains("--help") || Environment.GetCommandLineArgs().Length <= 2)
 {
     Write.Centered("Help for using demilis");
 }
@@ -16,7 +16,7 @@ Write.Logo();
 Write.Separator();
 Console.ResetColor();
 // HELP PAGE
-if (Environment.GetCommandLineArgs().Contains("--help") || Environment.GetCommandLineArgs().Contains("help") && Environment.GetCommandLineArgs().Length <= 2)
+if (Environment.GetCommandLineArgs().Contains("--help") || Environment.GetCommandLineArgs().Length <= 2)
 {
     Write.HelpPage();
     return;
@@ -48,7 +48,7 @@ if (Environment.GetCommandLineArgs().Contains("--host") || Environment.GetComman
         }
         catch
         {
-            Write.Error($"{Environment.GetCommandLineArgs().GetValue(indexOfHostArg + 1)} is not a valid IP.");
+            Write.Error($"{Environment.GetCommandLineArgs().GetValue(indexOfHostArg + 1)} is not a valid IP");
             return;
         }
     }
@@ -64,7 +64,7 @@ if (Environment.GetCommandLineArgs().Contains("--port") || Environment.GetComman
     short indexOfPortArg = 0;
     if (Environment.GetCommandLineArgs().Length >= 3)
     {
-        if (Environment.GetCommandLineArgs().Contains("-h"))
+        if (Environment.GetCommandLineArgs().Contains("-p"))
         {
             indexOfPortArg = (short)Array.FindIndex(Environment.GetCommandLineArgs(), row => row.Contains("-p"));
         }
@@ -77,19 +77,19 @@ if (Environment.GetCommandLineArgs().Contains("--port") || Environment.GetComman
         {
             if (result < 1)
             {
-                Write.Error($"The selected port ({Environment.GetCommandLineArgs().GetValue(indexOfPortArg+1)}) is invalid. The port must be greater than 0.");
+                Write.Error($"The selected port ({Environment.GetCommandLineArgs().GetValue(indexOfPortArg+1)}) is invalid. The port must be greater than 0");
                 return;
             }
             else if (result > ushort.MaxValue)
             {
-                Write.Error($"The selected port ({Environment.GetCommandLineArgs().GetValue(indexOfPortArg + 1)}) is invalid. The port must be less or equal to {ushort.MaxValue}.");
+                Write.Error($"The selected port ({Environment.GetCommandLineArgs().GetValue(indexOfPortArg + 1)}) is invalid. The port must be less or equal to {ushort.MaxValue}");
                 return;
             }
             port = (ushort)result;
         }
         else
         {
-            Write.Error("Pleace specify a valid number after the port argument");
+            Write.Error($"Pleace specify a valid number after the port argument. {Environment.GetCommandLineArgs().GetValue(indexOfPortArg+1)} is not a valid number");
             return;
         }
     }
