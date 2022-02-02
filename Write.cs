@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace demilis
 {
     public class Write
     {
-        static int consoleWidth = Console.WindowWidth;
+        static int consoleWidth = Console.WindowWidth; // need 2 account for uneven numbers
         // Default terminal length = 80
         internal static void Centered(string text)
         {
@@ -33,14 +34,21 @@ namespace demilis
         internal static void Logo()
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            Write.Centered(":::::::-.  .,::::::  .        :   ::: :::     ::: .::::::. ");
-            Write.Centered(" ;;,   `';,;;;;''''  ;;,.    ;;;  ;;; ;;;     ;;;;;;`    ` ");
-            Write.Centered(" `[[     [[ [[cccc   [[[[, ,[[[[, [[[ [[[     [[['[==/[[[[,");
-            Write.Centered("  $$,    $$ $$\"\"\"\"   $$$$$$$$\"$$$ $$$ $$'     $$$  '''    $");
-            Write.Centered("  888_,o8P' 888oo,__ 888 Y88\" 888o888o88oo,.__888 88b    dP");
-            Write.Centered("  MMMMP\"`   \"\"\"\"YUMMMMMM  M'  \"MMMMMM\"\"\"\"YUMMMMMM  \"YMmMY\" ");
-            Console.ForegroundColor = ConsoleColor.Red;
-            Write.Centered("The Multiple Connection Listener");
+            if (consoleWidth > ":::::::-.  .,::::::  .        :   ::: :::     ::: .::::::. ".Length)
+            {
+                Write.Centered(":::::::-.  .,::::::  .        :   ::: :::     ::: .::::::. ");
+                Write.Centered(" ;;,   `';,;;;;''''  ;;,.    ;;;  ;;; ;;;     ;;;;;;`    ` ");
+                Write.Centered(" `[[     [[ [[cccc   [[[[, ,[[[[, [[[ [[[     [[['[==/[[[[,");
+                Write.Centered("  $$,    $$ $$\"\"\"\"   $$$$$$$$\"$$$ $$$ $$'     $$$  '''    $");
+                Write.Centered("  888_,o8P' 888oo,__ 888 Y88\" 888o888o88oo,.__888 88b    dP");
+                Write.Centered("  MMMMP\"`   \"\"\"\"YUMMMMMM  M'  \"MMMMMM\"\"\"\"YUMMMMMM  \"YMmMY\" ");
+            }
+            else
+            {
+                Write.Centered("DEMILIS");
+            }
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Write.Centered("The Multiple TCP Connection Listener");
             Console.ResetColor();
         }
 
@@ -52,7 +60,49 @@ namespace demilis
                 separator += ":";
             }
             separator += "\n";
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine(separator);
+            Console.ResetColor();
+        }
+        internal static void HelpPage()
+        {
+            int printedLines = 1;
+            ArgManager argManager = new ArgManager();
+
+            Write.Centered("-VALID ARGUMENTS-\n");
+
+            foreach (Argument arg in argManager.GetArgs())
+            {
+                string currentLine = "--" + arg.GetName();
+
+                if (!arg.GetAlias().Equals("none"))
+                {
+                    string spaces2Add = "";
+                    for (int i = 0; i < (consoleWidth/6)-currentLine.Length; i++)
+                    {
+                        spaces2Add += " ";
+                    }
+                    currentLine += $"{spaces2Add}-{arg.GetAlias()}";
+                }
+
+                for (; currentLine.Length < (consoleWidth/2) - 13; )
+                {
+                    currentLine += " ";
+                }
+
+                currentLine += "Descripiton: " + arg.GetDescription();
+
+                if (printedLines % 2 == 0) { Console.ForegroundColor = ConsoleColor.DarkGray; }   
+                Console.WriteLine(currentLine);
+                Console.ResetColor();
+                printedLines++;
+            }
+        }
+        internal static void Error(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(text);
+            Console.ResetColor();
         }
     }
 }
