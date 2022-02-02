@@ -73,7 +73,7 @@ namespace demilis
 
             foreach (Argument arg in argManager.GetArgs())
             {
-                string currentLine = "--" + arg.GetName();
+                string currentLine = "--" + arg.GetName() + " ";
 
                 if (!arg.GetAlias().Equals("none"))
                 {
@@ -85,10 +85,11 @@ namespace demilis
                     currentLine += $"{spaces2Add}-{arg.GetAlias()}";
                 }
 
-                for (; currentLine.Length < (consoleWidth/2) - 13; )
+                do
                 {
                     currentLine += " ";
                 }
+                while (currentLine.Length < (consoleWidth/2) - 13);
 
                 currentLine += "Descripiton: " + arg.GetDescription();
 

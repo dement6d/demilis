@@ -9,7 +9,6 @@ namespace demilis {
         static void Main(string[] args) {
             bool verbose = false;
             string ipInput = "0.0.0.0";
-            IPAddress ip;
             ushort port = 80;
 
             if (Environment.GetCommandLineArgs().Contains("--help") || Environment.GetCommandLineArgs().Length <= 2)
