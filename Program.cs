@@ -59,7 +59,7 @@ namespace demilis {
                 try
                 {
                     Socket socket = await listener.AcceptSocketAsync();
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"{socket.RemoteEndPoint} connected");
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.Write("demilis> ");

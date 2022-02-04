@@ -17,6 +17,7 @@ namespace demilis
             commands.Add(new Status());
             commands.Add(new List());
             commands.Add(new Exit());
+            commands.Add(new Session());
         }
 
         internal Command.Command GetCommand(string input)
