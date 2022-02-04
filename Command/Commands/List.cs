@@ -49,7 +49,16 @@ namespace demilis.Command.Commands
                     while (toWrite.Length < consoleWidth / 3) { toWrite += " "; }
                     toWrite += "| " + Program.dictionary[session].RemoteEndPoint + " ";
                     while (toWrite.Length < consoleWidth / 1.5) { toWrite += " "; }
-                    toWrite += "| " + GetLocation(Program.dictionary[session].RemoteEndPoint.ToString()) + " ";
+
+                    string ip = Program.dictionary[session].RemoteEndPoint.ToString();
+                    int index = ip.IndexOf(":");
+
+                    if (index >= 0)
+                    {
+                        ip = ip.Substring(0, index);
+                    }
+
+                    toWrite += "| " + GetLocation(ip) + " ";
 
                     Console.WriteLine(toWrite);
                     Console.ResetColor();
@@ -64,7 +73,7 @@ namespace demilis.Command.Commands
                 IpInfoApi ipInfoApi = new IpInfoApi(new HttpClient());
                 return ipInfoApi.GetLocationByIpAsync(ip).Result;
             }
-            catch
+            catch (Exception e)
             {
                 return "Unknown";
             }
