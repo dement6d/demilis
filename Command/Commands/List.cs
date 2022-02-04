@@ -7,9 +7,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using IpInfo;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace demilis.Command.Commands
 {
@@ -36,7 +33,7 @@ namespace demilis.Command.Commands
             while (header.Length < consoleWidth / 3) { header += " "; }
             header += "| IP ";
             while (header.Length < consoleWidth / 1.5) { header += " "; }
-            header += "| Location ";
+            //header += "| Location ";
             Console.WriteLine(header);
 
             int printedLines = 1;
@@ -58,24 +55,12 @@ namespace demilis.Command.Commands
                         ip = ip.Substring(0, index);
                     }
 
-                    toWrite += "| " + GetLocation(ip) + " ";
+                    //toWrite += "| " + GetLocation(ip) + " ";
 
                     Console.WriteLine(toWrite);
                     Console.ResetColor();
                     printedLines++;
                 }
-            }
-        }
-        public string GetLocation(string ip)
-        {
-            try
-            {
-                IpInfoApi ipInfoApi = new IpInfoApi(new HttpClient());
-                return ipInfoApi.GetLocationByIpAsync(ip).Result;
-            }
-            catch (Exception e)
-            {
-                return "Unknown";
             }
         }
     }
