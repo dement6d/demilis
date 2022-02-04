@@ -56,20 +56,69 @@ namespace demilis.Command.Commands
                 }
             }
         }
-        private string GetLocation(string ip)
+        async private Task<string> GetLocation(string ip)
         {
             using var client = new HttpClient();
             IpInfoApi ipInfo = new IpInfoApi(client);
-            try
+
+            HttpClient _httpClient = new HttpClient()
             {
-                string info = new WebClient().DownloadString("http://ipinfo.io/" + ip);
-                ipInfo = JsonConvert.DeserializeObject<IpInfoApi>(info);
-                return ipInfo.GetCountryByIpAsync(ip).Result;
-            }
-            catch (Exception)
+                Timeout = TimeSpan.FromSeconds(5)
+            };
+            var response = await _httpClient.GetAsync("http://ipinfo.io/" + ip);
+            if (response.IsSuccessStatusCode)
             {
-                return "Unknown";
+                var json = await response.Content.ReadAsStringAsync();
+                var model = new GeoInfoViewModel();
+                model = JsonConvert.DeserializeObject<GeoInfoViewModel>(json);
+                return model.CountryName;
             }
+            return "Unknown";
+        }
+        public class GeoInfoViewModel
+        {
+
+            [JsonProperty("country_code")]
+
+            public string CountryCode { get; set; }
+
+
+            [JsonProperty("country_name")]
+
+            public string CountryName { get; set; }
+
+
+            [JsonProperty("region_code")]
+
+            public string RegionCode { get; set; }
+
+
+            [JsonProperty("region_name")]
+
+            public string RegionName { get; set; }
+
+
+            [JsonProperty("city")]
+
+            public string City { get; set; }
+
+
+            [JsonProperty("zip_code")]
+
+            public string ZipCode { get; set; }
+
+
+            [JsonProperty("latitude")]
+
+            public decimal Latitude { get; set; }
+
+
+            [JsonProperty("longitude")]
+
+            public string Longitude { get; set; }
+
+
+
         }
     }
 }
