@@ -8,7 +8,6 @@ namespace demilis.Command.Commands
 {
     internal class Help : Command
     {
-        static int consoleWidth = Console.WindowWidth; // need 2 account for uneven numbers
         public Help() : base()
         {
             base.name = "help";
@@ -16,6 +15,7 @@ namespace demilis.Command.Commands
         }
         public override void Execute()
         {
+            int consoleWidth = Console.WindowWidth; // need 2 account for uneven numbers
             int printedLines = 1;
 
             Write.Centered("-AVAILABLE COMMANDS-\n");

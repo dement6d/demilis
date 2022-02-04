@@ -13,7 +13,8 @@ namespace demilis
         // Default terminal length = 80
         internal static void Centered(string text)
         {
-             // need to account for uneven consle width numbers or use 80
+            consoleWidth = Console.WindowWidth;
+            // need to account for uneven consle width numbers or use 80
             int spacesToAdd = 0;
             if (text.Length % 2 != 0) // simplify if statement
             {
@@ -33,6 +34,7 @@ namespace demilis
 
         internal static void Logo()
         {
+            consoleWidth = Console.WindowWidth;
             Console.ForegroundColor = ConsoleColor.DarkRed;
             if (consoleWidth > ":::::::-.  .,::::::  .        :   ::: :::     ::: .::::::. ".Length)
             {
@@ -54,6 +56,7 @@ namespace demilis
 
         internal static void Separator()
         {
+            consoleWidth = Console.WindowWidth;
             string separator = "\n";
             for (int i = 0; i < consoleWidth; i++)
             {
@@ -66,6 +69,7 @@ namespace demilis
         }
         internal static void HelpPage()
         {
+            consoleWidth = Console.WindowWidth;
             int printedLines = 1;
             ArgManager argManager = new ArgManager();
 
