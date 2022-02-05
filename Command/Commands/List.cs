@@ -34,7 +34,7 @@ namespace demilis.Command.Commands
             while (header.Length < consoleWidth / 3) { header += " "; }
             header += "| IP ";
             while (header.Length < consoleWidth / 1.5) { header += " "; }
-            //header += "| Location ";
+            if (Program.useapi) header += "| Location ";
             Console.WriteLine(header);
 
             int printedLines = 1;
@@ -50,17 +50,25 @@ namespace demilis.Command.Commands
 
                     if (Program.useapi)
                     {
-                        IPGeolocationAPI api = new IPGeolocationAPI("9397b3fe90f5426a8556253450d51005");
-
-                        GeolocationParams geoParams = new GeolocationParams();
-                        geoParams.SetIp(GetIPFromEndPoint(Program.dictionary[session].RemoteEndPoint.ToString()));
-                        geoParams.SetFields("geo");
-
-                        Geolocation geolocation = api.GetGeolocation(geoParams);
-
-                        if (geolocation.GetStatus() == 200)
+                        try
                         {
-                            toWrite += "| " + geolocation.GetCountryName + " ";
+                            IPGeolocationAPI api = new IPGeolocationAPI("9397b3fe90f5426a8556253450d51005");
+
+                            GeolocationParams geoParams = new GeolocationParams();
+                            geoParams.SetIp(GetIPFromEndPoint(Program.dictionary[session].RemoteEndPoint.ToString()));
+                            geoParams.SetFields("geo,time_zone,currency");
+
+                            Geolocation geolocation = api.GetGeolocation(geoParams);
+
+                            if (geolocation.GetStatus() == 200)
+                            {
+                                toWrite += "| " + geolocation.GetCountryName() + " ";
+                            }
+
+                        }
+                        catch (Exception e)
+                        {
+                            toWrite += "| Unknown ";
                         }
                     }
                     Console.WriteLine(toWrite);
