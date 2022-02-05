@@ -46,13 +46,9 @@ namespace demilis.Command.Commands
             try
             {
                 Socket socket = Program.dictionary[session];
-                await Read(session);
+                Read(session);
                 while (true)
                 {
-                    if (Program.verbose)
-                    {
-                        Console.WriteLine("Sending input");
-                    }
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.Write("> ");
                     Console.ResetColor();
@@ -84,6 +80,7 @@ namespace demilis.Command.Commands
                     int nRet = await reader.ReadAsync(buff, 0, buff.Length);
                     if (nRet == 0)
                     {
+                        if (Program.verbose) Console.WriteLine("Client disconnected");
                         Program.dictionary.Remove(session);
                         break;
                     }
@@ -93,7 +90,7 @@ namespace demilis.Command.Commands
                 }
                 catch (Exception e)
                 {
-                    if (Program.verbose) Console.WriteLine(e.ToString());
+                    if (Program.verbose) Console.WriteLine($"Exception while reading: {e.ToString()}");
                     Program.dictionary.Remove(session);
                     break;
                 }
