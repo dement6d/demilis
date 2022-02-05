@@ -49,6 +49,10 @@ namespace demilis.Command.Commands
                 await Read(session);
                 while (true)
                 {
+                    if (Program.verbose)
+                    {
+                        Console.WriteLine("Sending input");
+                    }
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.Write("> ");
                     Console.ResetColor();
@@ -76,7 +80,7 @@ namespace demilis.Command.Commands
                     NetworkStream stream = new NetworkStream(socket);
                     StreamReader reader = new StreamReader(stream);
 
-                    char[] buff = new char[64];
+                    char[] buff = new char[4096];
                     int nRet = await reader.ReadAsync(buff, 0, buff.Length);
                     if (nRet == 0)
                     {
