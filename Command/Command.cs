@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,8 +17,6 @@ namespace demilis.Command
             this.name = name;
             this.description = description;
         }
-        public virtual void Execute()
-        {
-        }
+        public virtual void Execute(ArrayList args) { }
     }
 }

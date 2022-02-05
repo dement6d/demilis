@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace demilis.Command.Commands
             name = "status";
             description = "Displays the current IP and PORT";
         }
-        public override void Execute()
+        public override void Execute(ArrayList args)
         {
             Console.WriteLine($"Listening for incoming TCP connections on {Program.ip}:{Program.port}");
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,12 +14,12 @@ namespace demilis.Command.Commands
             base.name = "help";
             base.description = "Displays list of commands";
         }
-        public override void Execute()
+        public override void Execute(ArrayList args)
         {
             int consoleWidth = Console.WindowWidth; // need 2 account for uneven numbers
             int printedLines = 1;
 
-            Write.Centered("-AVAILABLE COMMANDS-\n");
+            Write.Centered("-AVAILABLE COMMANDS-");
 
             foreach (Command command in CommandManager.GetCommands())
             {

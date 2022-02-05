@@ -22,11 +22,13 @@ namespace demilis
 
         internal Command.Command GetCommand(string input)
         {
+            int index = input.Length;
+            if (input.Contains(" ")) index = input.IndexOf(" ");
             if (!String.IsNullOrEmpty(input))
             {
                 foreach (Command.Command command in commands)
                 {
-                    if (command.name.ToLower() == input.ToLower())
+                    if (command.name.ToLower() == input.ToLower().Trim() || command.name.ToLower() == input.ToLower().Substring(0, index).ToString())
                     {
                         return command;
                     }

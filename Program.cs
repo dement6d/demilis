@@ -1,10 +1,11 @@
-﻿using System.Net;
+﻿using System.Collections;
+using System.Net;
 using System.Net.Sockets;
 
 namespace demilis {
     internal class Program {
 
-        static bool verbose = false;
+        public static bool verbose = false;
         public static bool useapi = false;
 
         static string ipInput = "0.0.0.0";
@@ -34,7 +35,7 @@ namespace demilis {
                 Write.Error($"Result of listening on {IPAddress.Parse(ipInput)}:{port}: {toWrite}");
                 return;
             }
-            Console.WriteLine($"Listening for incoming TCP connections on {System.Net.IPAddress.Parse(ipInput)}:{port}");
+            Console.WriteLine($"Listening for incoming TCP connections on {IPAddress.Parse(ipInput)}:{port}");
 
             AcceptConnections(listener);
             CommandManager commandManager = new CommandManager();
@@ -46,11 +47,16 @@ namespace demilis {
                 string input = Console.ReadLine();
                 try
                 {
-                    if (!String.IsNullOrEmpty(input.Trim())) commandManager.GetCommand(input).Execute();
+                    if (!String.IsNullOrEmpty(input.Trim()))
+                    {
+                        Command.Command c = commandManager.GetCommand(input);
+                        c.Execute(GetArgs(input.Replace(c.name, "")));
+                    }
                 }
-                catch
+                catch (Exception e)
                 {
                     Write.Error($"Invalid command \"{input}\", type \"help\" for a list of available commands");
+                    Write.Error(e.ToString());
                 }
             }
         }
@@ -171,6 +177,22 @@ namespace demilis {
                 }
             }
             return 0;
+        }
+        protected static ArrayList GetArgs(string args)
+        {
+            string[] argsArray = args.Split(' ');
+            ArrayList result = new ArrayList(argsArray);
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                var row = (string)result[i];
+                if (String.IsNullOrEmpty(row))
+                {
+                    result.RemoveAt(i);
+                    i--;
+                }
+            }
+            return result;
         }
     }
 }

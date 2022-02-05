@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace demilis.Command.Commands
             description = "Exits demilis";
         }
 
-        public override void Execute()
+        public override void Execute(ArrayList args)
         {
             Process.GetCurrentProcess().Kill();
         }

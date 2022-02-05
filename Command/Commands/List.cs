@@ -18,20 +18,20 @@ namespace demilis.Command.Commands
             name = "list";
             description = "Displays a list of active sessions";
         }
-        public override void Execute()
+        public override void Execute(ArrayList args)
         {
             int consoleWidth = Console.WindowWidth; // need 2 account for uneven numbers
             int activeSessions = 0;
-            ArrayList ipArray = new ArrayList();
 
             foreach (Socket socket in Program.dictionary.Values)
             {
                 if (socket.Connected)
                 {
-                    ipArray.Add(GetIPFromEndPoint(socket.RemoteEndPoint));
                     activeSessions++;
                 }
             }
+
+            // Write Header
             Write.Centered($"Available sessions: {activeSessions}");
             string header = $"Session ";
             while (header.Length < consoleWidth / 3) { header += " "; }
@@ -58,7 +58,7 @@ namespace demilis.Command.Commands
                             IPGeolocationAPI api = new IPGeolocationAPI("9397b3fe90f5426a8556253450d51005");
 
                             GeolocationParams geoParams = new GeolocationParams();
-                            geoParams.SetIps((string[])ipArray.ToArray(typeof(string)));
+                            geoParams.SetIp(GetIPFromEndPoint(Program.dictionary[session].RemoteEndPoint));
                             geoParams.SetFields("geo,time_zone,currency");
 
                             Geolocation geolocation = api.GetGeolocation(geoParams);
@@ -67,9 +67,8 @@ namespace demilis.Command.Commands
                             {
                                 toWrite += "| " + geolocation.GetCountryName() + " ";
                             }
-
                         }
-                        catch (Exception e)
+                        catch
                         {
                             toWrite += "| Unknown ";
                         }
