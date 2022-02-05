@@ -46,7 +46,9 @@ namespace demilis.Command.Commands
                 if (Program.dictionary[session].Connected)
                 {
                     if (printedLines % 2 == 0) { Console.ForegroundColor = ConsoleColor.DarkGray; }
-                    string toWrite = $"Session {session} ";
+                    string toWrite = "";
+                    if (Program.nicknames.ContainsKey(session)) toWrite = $"Session {session} ({Program.nicknames[session]}) ";
+                    else toWrite = $"Session {session} ";
                     while (toWrite.Length < consoleWidth / 3) { toWrite += " "; }
                     toWrite += "| " + Program.dictionary[session].Client.RemoteEndPoint + " ";
                     while (toWrite.Length < consoleWidth / 1.5) { toWrite += " "; }

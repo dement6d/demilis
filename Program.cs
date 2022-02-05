@@ -12,6 +12,7 @@ namespace demilis {
         public static IPAddress ip;
         public static ushort port = 80;
 
+        public static Dictionary<int, string> nicknames = new Dictionary<int, string>();
         public static Dictionary<int, TcpClient> dictionary = new Dictionary<int, TcpClient>();
         static int socketNumber = 0;
 
@@ -51,7 +52,7 @@ namespace demilis {
                     if (!String.IsNullOrEmpty(input.Trim()))
                     {
                         Command.Command c = commandManager.GetCommand(input);
-                        c.Execute(GetArgs(input.Replace(c.name, "")));
+                        c.Execute(GetArgs(input.Substring(c.name.Length)));
                     }
                 }
                 catch (Exception e)

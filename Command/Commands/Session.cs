@@ -14,14 +14,15 @@ namespace demilis.Command.Commands
         public Session() : base()
         {
             name = "session";
-            description = "Interacts with the specified session";
+            description = "Interacts with the specified session. Example: 'session 1'";
         }
         public override void Execute(ArrayList args)
         {
             if (args.Count > 0)
             {
-                if (int.TryParse(args[0].ToString(), out int result))
+                if (int.TryParse(args[0].ToString(), out int result) || Program.nicknames.ContainsValue(args[0].ToString()))
                 {
+                    if (Program.nicknames.ContainsValue(args[0].ToString())) result = Program.nicknames.FirstOrDefault(x => x.Value == args[0].ToString()).Key;
                     if (SessionExists(result))
                     {
                         Write.Centered($"Interacting with session {result}");
@@ -105,7 +106,7 @@ namespace demilis.Command.Commands
                 }
             }
         }
-        public bool SessionExists(int number)
+        public static bool SessionExists(int number)
         {
             foreach (int session in Program.dictionary.Keys)
             {
