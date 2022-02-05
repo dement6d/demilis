@@ -5,6 +5,8 @@ namespace demilis {
     internal class Program {
 
         static bool verbose = false;
+        public static bool useapi = false;
+
         static string ipInput = "0.0.0.0";
         public static IPAddress ip;
         public static ushort port = 80;
@@ -90,6 +92,11 @@ namespace demilis {
             if (Environment.GetCommandLineArgs().Contains("--verbose", StringComparer.OrdinalIgnoreCase) || Environment.GetCommandLineArgs().Contains("-v", StringComparer.OrdinalIgnoreCase))
             {
                 verbose = true;
+            }
+            // SET GETAPI FROM ARGUMENT
+            if (Environment.GetCommandLineArgs().Contains("--use-api", StringComparer.OrdinalIgnoreCase))
+            {
+                useapi = true;
             }
             // GET IP FROM ARGUMENT
             if (Environment.GetCommandLineArgs().Contains("--host", StringComparer.OrdinalIgnoreCase) || Environment.GetCommandLineArgs().Contains("-h", StringComparer.OrdinalIgnoreCase))

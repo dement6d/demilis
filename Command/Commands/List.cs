@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using IPGeolocation;
 
 namespace demilis.Command.Commands
 {
@@ -47,21 +48,36 @@ namespace demilis.Command.Commands
                     toWrite += "| " + Program.dictionary[session].RemoteEndPoint + " ";
                     while (toWrite.Length < consoleWidth / 1.5) { toWrite += " "; }
 
-                    string ip = Program.dictionary[session].RemoteEndPoint.ToString();
-                    int index = ip.IndexOf(":");
-
-                    if (index >= 0)
+                    if (Program.useapi)
                     {
-                        ip = ip.Substring(0, index);
+                        IPGeolocationAPI api = new IPGeolocationAPI("9397b3fe90f5426a8556253450d51005");
+
+                        GeolocationParams geoParams = new GeolocationParams();
+                        geoParams.SetIp(GetIPFromEndPoint(Program.dictionary[session].RemoteEndPoint.ToString()));
+                        geoParams.SetFields("geo");
+
+                        Geolocation geolocation = api.GetGeolocation(geoParams);
+
+                        if (geolocation.GetStatus() == 200)
+                        {
+                            toWrite += "| " + geolocation.GetCountryName + " ";
+                        }
                     }
-
-                    //toWrite += "| " + GetLocation(ip) + " ";
-
                     Console.WriteLine(toWrite);
                     Console.ResetColor();
                     printedLines++;
                 }
             }
+        }
+        public string GetIPFromEndPoint(string IPEndPoint)
+        {
+            int index = IPEndPoint.IndexOf(":");
+
+            if (index >= 0)
+            {
+                return IPEndPoint.Substring(0, index); // IP without port
+            }
+            return null;
         }
     }
 }
