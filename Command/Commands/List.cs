@@ -37,7 +37,7 @@ namespace demilis.Command.Commands
             while (header.Length < consoleWidth / 3) { header += " "; }
             header += "| IP ";
             while (header.Length < consoleWidth / 1.5) { header += " "; }
-            if (Program.useapi) header += "| Location ";
+            if (Program.useApi) header += "| Location ";
             Console.WriteLine(header);
 
             int printedLines = 1;
@@ -53,7 +53,7 @@ namespace demilis.Command.Commands
                     toWrite += "| " + Program.dictionary[session].Client.RemoteEndPoint + " ";
                     while (toWrite.Length < consoleWidth / 1.5) { toWrite += " "; }
 
-                    if (Program.useapi)
+                    if (Program.useApi)
                     {
                         try
                         {

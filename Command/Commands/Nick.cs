@@ -23,8 +23,22 @@ namespace demilis.Command.Commands
                 {
                     if (Session.SessionExists(result))
                     {
-                        if (Program.nicknames.ContainsKey(result)) Program.nicknames.Remove(result);
-                        Program.nicknames.Add(result, args[1].ToString());
+                        string input = "no";
+                        if (Program.nicknames.ContainsValue(args[1].ToString()))
+                        {
+                            Write.Error($"Session {Program.nicknames.FirstOrDefault(x => x.Value == args[1]).Key} already has this nickname.\nContinue anyways? yes/No");
+                            input = Console.ReadLine().Trim().ToLower();
+                        }
+                        else
+                        {
+                            if (Program.nicknames.ContainsKey(result)) Program.nicknames.Remove(result);
+                            Program.nicknames.Add(result, args[1].ToString());
+                        }
+                        if (input == "yes" || input == "ye" || input == "y" || input == "absolutely" || input == "ofc")
+                        {
+                            if (Program.nicknames.ContainsKey(result)) Program.nicknames.Remove(result);
+                            Program.nicknames.Add(result, args[1].ToString());
+                        }
                     }
                     else
                     {

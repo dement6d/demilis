@@ -17,6 +17,7 @@ namespace demilis
             arguments.Add(new Argument("port", "Set the PORT to listen on", "p"));
             arguments.Add(new Argument("verbose", "Specify this argument if you wish for demilis to print more output information", "v"));
             arguments.Add(new Argument("use-api", "Specify this argument if you wish to use an IP to Location API"));
+            arguments.Add(new Argument("hide-ips", "Hides IP Adresses within demilis (except from in error messages)"));
         }
         public ArrayList GetArgs()
         {

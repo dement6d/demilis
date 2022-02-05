@@ -6,7 +6,8 @@ namespace demilis {
     internal class Program {
         public static bool interacting = false;
         public static bool verbose = false;
-        public static bool useapi = false;
+        public static bool useApi = false;
+        public static bool hideIPs = false;
 
         static string ipInput = "0.0.0.0";
         public static IPAddress ip;
@@ -108,7 +109,7 @@ namespace demilis {
             // SET GETAPI FROM ARGUMENT
             if (Environment.GetCommandLineArgs().Contains("--use-api", StringComparer.OrdinalIgnoreCase))
             {
-                useapi = true;
+                useApi = true;
             }
             // GET IP FROM ARGUMENT
             if (Environment.GetCommandLineArgs().Contains("--host", StringComparer.OrdinalIgnoreCase) || Environment.GetCommandLineArgs().Contains("-h", StringComparer.OrdinalIgnoreCase))
