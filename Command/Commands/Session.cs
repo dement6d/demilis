@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,14 +47,10 @@ namespace demilis.Command.Commands
         {
             try
             {
-                Socket socket = Program.dictionary[session];
-                TcpClient client = new TcpClient();
                 Read(session);
+                NetworkStream stream = Program.dictionary[session].GetStream();
                 while (true)
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write("> ");
-                    Console.ResetColor();
                     string input = Console.ReadLine();
 
                     if (input.Trim() == "exit")
@@ -61,9 +58,11 @@ namespace demilis.Command.Commands
                         Program.interacting = false;
                         break;
                     }
-                    byte[] buffMessage = Encoding.ASCII.GetBytes(input);
-                    client.Client = socket;
-                    client.GetStream().Write(buffMessage);
+
+                    byte[] buffMessage = Encoding.ASCII.GetBytes(input+"\r\n");
+
+                    stream.Write(buffMessage, 0, buffMessage.Length);
+                    stream.Flush();
                 }
             }
             catch (Exception e)
@@ -76,14 +75,14 @@ namespace demilis.Command.Commands
         }
         private async Task Read(int session)
         {
-            Socket socket = Program.dictionary[session];
+            TcpClient client = Program.dictionary[session];
+            NetworkStream stream = client.GetStream();
+            StreamReader reader = new StreamReader(stream);
+
             while (Program.interacting)
             {
                 try
                 {
-                    NetworkStream stream = new NetworkStream(socket);
-                    StreamReader reader = new StreamReader(stream);
-
                     char[] buff = new char[4096];
                     int nRet = await reader.ReadAsync(buff, 0, buff.Length);
                     if (nRet == 0)

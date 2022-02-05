@@ -12,7 +12,7 @@ namespace demilis {
         public static IPAddress ip;
         public static ushort port = 80;
 
-        public static Dictionary<int, Socket> dictionary = new Dictionary<int, Socket>();
+        public static Dictionary<int, TcpClient> dictionary = new Dictionary<int, TcpClient>();
         static int socketNumber = 0;
 
         static void Main(string[] args) {
@@ -35,8 +35,8 @@ namespace demilis {
                 Write.Error($"Result of listening on {IPAddress.Parse(ipInput)}:{port}: {toWrite}");
                 return;
             }
-            Console.WriteLine($"Listening for incoming TCP connections on {IPAddress.Parse(ipInput)}:{port}");
 
+            Console.WriteLine($"Listening for incoming TCP connections on {IPAddress.Parse(ipInput)}:{port}");
             AcceptConnections(listener);
             CommandManager commandManager = new CommandManager();
             while (true)
@@ -63,21 +63,22 @@ namespace demilis {
         }
         protected static async Task AcceptConnections(TcpListener listener)
         {
+            listener.Start();
             while (true)
             {
                 try
                 {
-                    Socket socket = await listener.AcceptSocketAsync();
+                    TcpClient client = await listener.AcceptTcpClientAsync();
                     if (!interacting)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"{socket.RemoteEndPoint} connected");
+                        Console.WriteLine($"{client.Client.RemoteEndPoint} connected");
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.Write("demilis> ");
                         Console.ResetColor();
                     }
 
-                    dictionary.Add(socketNumber, socket);
+                    dictionary.Add(socketNumber, client);
                     socketNumber++;
                 }
                 catch (Exception e)

