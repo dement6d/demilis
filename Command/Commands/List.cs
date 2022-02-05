@@ -22,10 +22,13 @@ namespace demilis.Command.Commands
         {
             int consoleWidth = Console.WindowWidth; // need 2 account for uneven numbers
             int activeSessions = 0;
+            ArrayList ipArray = new ArrayList();
+
             foreach (Socket socket in Program.dictionary.Values)
             {
                 if (socket.Connected)
                 {
+                    ipArray.Add(GetIPFromEndPoint(socket.RemoteEndPoint));
                     activeSessions++;
                 }
             }
@@ -55,7 +58,7 @@ namespace demilis.Command.Commands
                             IPGeolocationAPI api = new IPGeolocationAPI("9397b3fe90f5426a8556253450d51005");
 
                             GeolocationParams geoParams = new GeolocationParams();
-                            geoParams.SetIp(GetIPFromEndPoint(Program.dictionary[session].RemoteEndPoint.ToString()));
+                            geoParams.SetIps((string[])ipArray.ToArray(typeof(string)));
                             geoParams.SetFields("geo,time_zone,currency");
 
                             Geolocation geolocation = api.GetGeolocation(geoParams);
@@ -77,13 +80,13 @@ namespace demilis.Command.Commands
                 }
             }
         }
-        public string GetIPFromEndPoint(string IPEndPoint)
+        public string GetIPFromEndPoint(EndPoint IPEndPoint)
         {
-            int index = IPEndPoint.IndexOf(":");
+            int index = IPEndPoint.ToString().IndexOf(":");
 
             if (index >= 0)
             {
-                return IPEndPoint.Substring(0, index); // IP without port
+                return IPEndPoint.ToString().Substring(0, index); // IP without port
             }
             return null;
         }
