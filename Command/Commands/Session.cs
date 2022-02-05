@@ -47,6 +47,7 @@ namespace demilis.Command.Commands
             try
             {
                 Socket socket = Program.dictionary[session];
+                TcpClient client = new TcpClient();
                 Read(session);
                 while (true)
                 {
@@ -61,7 +62,8 @@ namespace demilis.Command.Commands
                         break;
                     }
                     byte[] buffMessage = Encoding.ASCII.GetBytes(input);
-                    socket.Send(buffMessage);
+                    client.Client = socket;
+                    client.GetStream().Write(buffMessage);
                 }
             }
             catch (Exception e)
