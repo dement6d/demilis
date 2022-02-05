@@ -4,7 +4,7 @@ using System.Net.Sockets;
 
 namespace demilis {
     internal class Program {
-
+        public static bool interacting = false;
         public static bool verbose = false;
         public static bool useapi = false;
 
@@ -45,6 +45,7 @@ namespace demilis {
                 Console.Write("demilis> ");
                 Console.ResetColor();
                 string input = Console.ReadLine();
+
                 try
                 {
                     if (!String.IsNullOrEmpty(input.Trim()))
@@ -67,11 +68,14 @@ namespace demilis {
                 try
                 {
                     Socket socket = await listener.AcceptSocketAsync();
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"{socket.RemoteEndPoint} connected");
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write("demilis> ");
-                    Console.ResetColor();
+                    if (!interacting)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"{socket.RemoteEndPoint} connected");
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.Write("demilis> ");
+                        Console.ResetColor();
+                    }
 
                     dictionary.Add(socketNumber, socket);
                     socketNumber++;

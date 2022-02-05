@@ -24,6 +24,7 @@ namespace demilis.Command.Commands
                     if (SessionExists(result))
                     {
                         Write.Centered($"Interacting with session {result}");
+                        Program.interacting = true;
                         Interact(result);
                     }
                     else
@@ -54,6 +55,11 @@ namespace demilis.Command.Commands
                     Console.ResetColor();
                     string input = Console.ReadLine();
 
+                    if (input.Trim() == "exit")
+                    {
+                        Program.interacting = false;
+                        break;
+                    }
                     byte[] buffMessage = Encoding.ASCII.GetBytes(input);
                     socket.Send(buffMessage);
                 }
@@ -69,7 +75,7 @@ namespace demilis.Command.Commands
         private async Task Read(int session)
         {
             Socket socket = Program.dictionary[session];
-            while (true)
+            while (Program.interacting)
             {
                 try
                 {
@@ -82,6 +88,7 @@ namespace demilis.Command.Commands
                     {
                         if (Program.verbose) Console.WriteLine("Client disconnected");
                         Program.dictionary.Remove(session);
+                        Program.interacting = false;
                         break;
                     }
 
@@ -92,6 +99,7 @@ namespace demilis.Command.Commands
                 {
                     if (Program.verbose) Console.WriteLine($"Exception while reading: {e.ToString()}");
                     Program.dictionary.Remove(session);
+                    Program.interacting = false;
                     break;
                 }
             }
