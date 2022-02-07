@@ -76,7 +76,7 @@ namespace demilis
 
             foreach (Argument arg in argManager.GetArgs())
             {
-                string currentLine = "--" + arg.GetName() + " ";
+                string currentLine = arg.required ? "(Required) --" + arg.GetName() + " " : "--" + arg.GetName() + " ";
 
                 if (!arg.GetAlias().Equals("none"))
                 {

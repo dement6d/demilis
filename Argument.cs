@@ -11,7 +11,7 @@ namespace demilis
         private string name;
         private string description;
         private string alias = "none";
-        private bool required = false;
+        public bool required = false;
         public Argument(string name, string description)
         {
             this.name = name;
@@ -39,6 +39,5 @@ namespace demilis
         public string GetName() { return name; }
         public string GetDescription() { return description; }
         public string GetAlias() { return alias; }
-        public bool IsRequired() { return required; }
     }
 }

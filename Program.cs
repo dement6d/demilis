@@ -12,7 +12,7 @@ namespace demilis {
 
         static string ipInput = "0.0.0.0";
         public static IPAddress ip;
-        public static ushort port = 80;
+        public static ushort port;
 
         public static Dictionary<int, string> nicknames = new Dictionary<int, string>();
         public static Dictionary<int, TcpClient> dictionary = new Dictionary<int, TcpClient>();
@@ -94,6 +94,15 @@ namespace demilis {
         }
         protected static int HandleArguments()
         {
+            ArgManager argManager = new ArgManager();
+            foreach (Argument arg in argManager.GetArgs())
+            {
+                if (arg.required && !Environment.GetCommandLineArgs().Contains("--"+arg.GetName(), StringComparer.OrdinalIgnoreCase) && !Environment.GetCommandLineArgs().Contains("-" + arg.GetAlias(), StringComparer.OrdinalIgnoreCase))
+                {
+                    Write.Error($"Missing required argument: --{arg.GetName()}");
+                    return -1;
+                }
+            }
             // HELP PAGE
             if (Environment.GetCommandLineArgs().Contains("--help", StringComparer.OrdinalIgnoreCase) || Environment.GetCommandLineArgs().Length <= 2)
             {
