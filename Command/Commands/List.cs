@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using IPGeolocation;
 
@@ -50,7 +51,8 @@ namespace demilis.Command.Commands
                     if (Program.nicknames.ContainsKey(session)) toWrite = $"Session {session} ({Program.nicknames[session]}) ";
                     else toWrite = $"Session {session} ";
                     while (toWrite.Length < consoleWidth / 3) { toWrite += " "; }
-                    toWrite += "| " + Program.dictionary[session].Client.RemoteEndPoint + " ";
+                    if (Program.hideIPs) toWrite += "| " + Regex.Replace(Program.dictionary[session].Client.RemoteEndPoint.ToString() + " ", "[0-9]", "*");
+                    else toWrite += "| " + Program.dictionary[session].Client.RemoteEndPoint + " ";
                     while (toWrite.Length < consoleWidth / 1.5) { toWrite += " "; }
 
                     if (Program.useApi)

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Net;
 using System.Net.Sockets;
+using System.Text.RegularExpressions;
 
 namespace demilis {
     internal class Program {
@@ -74,7 +75,8 @@ namespace demilis {
                     if (!interacting)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"{client.Client.RemoteEndPoint} connected");
+                        if (hideIPs) Console.WriteLine($"{Regex.Replace(client.Client.RemoteEndPoint.ToString() + " ", "[0-9]", "*")} connected");
+                        else Console.WriteLine($"{client.Client.RemoteEndPoint} connected");
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.Write("demilis> ");
                         Console.ResetColor();
@@ -106,10 +108,15 @@ namespace demilis {
             {
                 verbose = true;
             }
-            // SET GETAPI FROM ARGUMENT
-            if (Environment.GetCommandLineArgs().Contains("--use-api", StringComparer.OrdinalIgnoreCase))
+            // SET USE-API FROM ARGUMENT
+            if (Environment.GetCommandLineArgs().Contains("--use-api", StringComparer.OrdinalIgnoreCase) || Environment.GetCommandLineArgs().Contains("-ua", StringComparer.OrdinalIgnoreCase))
             {
                 useApi = true;
+            }
+            // SET HIDE-IPS FROM ARGUMENT
+            if (Environment.GetCommandLineArgs().Contains("--hide-ips", StringComparer.OrdinalIgnoreCase) || Environment.GetCommandLineArgs().Contains("-hips", StringComparer.OrdinalIgnoreCase))
+            {
+                hideIPs = true;
             }
             // GET IP FROM ARGUMENT
             if (Environment.GetCommandLineArgs().Contains("--host", StringComparer.OrdinalIgnoreCase) || Environment.GetCommandLineArgs().Contains("-h", StringComparer.OrdinalIgnoreCase))

@@ -53,7 +53,6 @@ namespace demilis
             Write.Centered("The Multiple TCP Connection Listener");
             Console.ResetColor();
         }
-
         internal static void Separator()
         {
             consoleWidth = Console.WindowWidth;
