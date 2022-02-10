@@ -32,7 +32,7 @@
 # Usage
 Running `demilis` will print the help page with all arugments it can be ran with.
 
-For listening on an IP and port the __required arguments__ are `-h` (`--host`) and `-p` (`--port`)
+For listening on an IP and port the __required argument__ is `-p` (`--port`)
 
 Once you start listening on an IP and port you will be inside the demilis command line, from here you can type `help` and see all available commands (different from arguments when launching demilis)
 
