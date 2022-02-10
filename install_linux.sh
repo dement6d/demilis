@@ -7,7 +7,7 @@ fi
 cd src
 dotnet publish -c Release -r linux-x64 -p:PublishSingleFile=true --self-contained true
 
-mv src/bin/Release/net6.0/linux-x64/publish/demilis /usr/bin/
+mv bin/Release/net6.0/linux-x64/publish/demilis /usr/bin/
 chmod +x /usr/bin/demilis
 
 echo ""
