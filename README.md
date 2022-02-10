@@ -14,7 +14,7 @@
   </a>
 </p>
 <p align="center">
-  <a href="https://github.com/dement6d/demilis/blob/main/README.md#donate">
+  <a href="#donate">
     <img src="https://img.shields.io/badge/donate-%23009900?style=flat-square"/>
   </a>
 </p>
