@@ -3,14 +3,14 @@
   <img src="https://user-images.githubusercontent.com/93228501/153415769-1223225e-578e-4b3e-93bc-8b27614eb209.png" alt="demilis"/>
 </p>
 <p align="center">
+  <a href="https://github.com/dement6d/demilis/releases/download/v1.0.0/sha256sums.txt">
+    <img src="https://img.shields.io/badge/sha256sums-%23bf1919?style=flat-square"/>
+  </a>
   <a href="https://github.com/dement6d/demilis/releases/download/v1.0.0/demilis_linux-x86-64">
     <img src="https://img.shields.io/badge/linux-v1.0.0-%23bf1919?style=flat-square"/>
   </a>
   <a href="https://github.com/dement6d/demilis/releases/download/v1.0.0/demilis_win-x86-64.exe">
     <img src="https://img.shields.io/badge/windows-v1.0.0-%23bf1919?style=flat-square"/>
-  </a>
-  <a href="https://github.com/dement6d/demilis/releases/download/v1.0.0/sha256sums.txt">
-    <img src="https://img.shields.io/badge/sha256sums-%23bf1919?style=flat-square"/>
   </a>
 </p>
 <p align="center">
