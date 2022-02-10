@@ -1,5 +1,6 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/93228501/153414110-c20ec573-7fb4-43ae-a252-6fb01790e22a.png" alt="demilis"/>
+
+  <img src="https://user-images.githubusercontent.com/93228501/153415769-1223225e-578e-4b3e-93bc-8b27614eb209.png" alt="demilis"/>
 </p>
 <p align="center">
   <a href="https://github.com/dement6d/demilis/releases/download/v1.0.0/demilis_linux-x86-64">
