@@ -1,14 +1,4 @@
-```
-               :::::::-.  .,::::::  .        :   ::: :::     ::: .::::::.                
-                ;;,   `';,;;;;''''  ;;,.    ;;;  ;;; ;;;     ;;;;;;`    `                
-                `[[     [[ [[cccc   [[[[, ,[[[[, [[[ [[[     [[['[==/[[[[,               
-                 $$,    $$ $$""""   $$$$$$$$"$$$ $$$ $$'     $$$  '''    $               
-                 888_,o8P' 888oo,__ 888 Y88" 888o888o88oo,.__888 88b    dP               
-                 MMMMP"`   """"YUMMMMMM  M'  "MMMMMM""""YUMMMMMM  "YMmMY"                
-                           The Multiple TCP Connection Listener                           
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-```
+![demilis](https://user-images.githubusercontent.com/93228501/153396972-58bd308c-ad7f-4217-a2f9-b086c28a2c7c.png)
 # Installation (Windows)
 1. Download the repository [here](https://github.com/dement6d/demilis/archive/refs/heads/main.zip) OR clone it with `git clone https://github.com/dement6d/demilis.git`
 2. If you downloaded the repository from [here](https://github.com/dement6d/demilis/archive/refs/heads/main.zip), extract it to a folder using [7zip](https://sourceforge.net/projects/sevenzip/files/7-Zip/) or another preferred method
