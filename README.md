@@ -1,4 +1,20 @@
-![demilis](https://user-images.githubusercontent.com/93228501/153396972-58bd308c-ad7f-4217-a2f9-b086c28a2c7c.png)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/93228501/153396972-58bd308c-ad7f-4217-a2f9-b086c28a2c7c.png" alt="demilis"/>
+</p>
+<p align="center">
+  <a href="https://github.com/dement6d/demilis/releases/download/v1.0.0/demilis_linux-x86-64">
+    <img src="https://img.shields.io/badge/linux-v1.0.0-%23bf1919?style=flat-square"/>
+  </a>
+  <a href="https://github.com/dement6d/demilis/releases/download/v1.0.0/demilis_win-x86-64.exe">
+    <img src="https://img.shields.io/badge/windows-v1.0.0-%23bf1919?style=flat-square"/>
+  </a>
+</p>
+<p align="center">
+  <a href="https://github.com/dement6d/demilis/releases/download/v1.0.0/sha256sums.txt">
+    <img src="https://img.shields.io/badge/sha256sums-%23bf1919?style=flat-square"/>
+  </a>
+</p>
+
 # Installation (Windows)
 1. Download the repository [here](https://github.com/dement6d/demilis/archive/refs/heads/main.zip) OR clone it with `git clone https://github.com/dement6d/demilis.git`
 2. If you downloaded the repository from [here](https://github.com/dement6d/demilis/archive/refs/heads/main.zip), extract it to a folder using [7zip](https://sourceforge.net/projects/sevenzip/files/7-Zip/) or another preferred method
