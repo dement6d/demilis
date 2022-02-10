@@ -1,4 +1,4 @@
 .vs/
-bin/
-obj/
+src/bin/
+src/obj/
 README.md

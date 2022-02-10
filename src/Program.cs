@@ -103,6 +103,7 @@ namespace demilis {
                     return -1;
                 }
             }
+
             // HELP PAGE
             if (Environment.GetCommandLineArgs().Contains("--help", StringComparer.OrdinalIgnoreCase) || Environment.GetCommandLineArgs().Length <= 2)
             {
