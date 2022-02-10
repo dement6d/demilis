@@ -1,2 +1,0 @@
-/home/demented/repos/demilis/bin/Release/net6.0/linux-x64/publish/demilis.pdb
-/home/demented/repos/demilis/bin/Release/net6.0/linux-x64/publish/demilis
