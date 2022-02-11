@@ -94,6 +94,17 @@ namespace demilis {
         }
         protected static int HandleArguments()
         {
+            // HELP PAGE
+            if (Environment.GetCommandLineArgs().Contains("--help", StringComparer.OrdinalIgnoreCase) || Environment.GetCommandLineArgs().Length <= 2)
+            {
+                Write.Centered("Help for using demilis");
+                Write.Logo();
+                Write.Separator();
+                Write.HelpPage();
+                return -1;
+            }
+
+            // HANDLE REQUIRED ARGUMENTS
             ArgManager argManager = new ArgManager();
             foreach (Argument arg in argManager.GetArgs())
             {
@@ -104,15 +115,6 @@ namespace demilis {
                 }
             }
 
-            // HELP PAGE
-            if (Environment.GetCommandLineArgs().Contains("--help", StringComparer.OrdinalIgnoreCase) || Environment.GetCommandLineArgs().Length <= 2)
-            {
-                Write.Centered("Help for using demilis");
-                Write.Logo();
-                Write.Separator();
-                Write.HelpPage();
-                return -1;
-            }
             // SET VERBOSE FROM ARGUMENT
             if (Environment.GetCommandLineArgs().Contains("--verbose", StringComparer.OrdinalIgnoreCase) || Environment.GetCommandLineArgs().Contains("-v", StringComparer.OrdinalIgnoreCase))
             {
