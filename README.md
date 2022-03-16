@@ -48,4 +48,5 @@ Optionally, you can give a session a nickname by running the `nick` command and 
 To exit demilis, run the `exit` command or press `Ctrl+C`
 
 # Donate
+###### [Paypal](https://paypal.me/dement6d): https://paypal.me/dement6d
 ###### XMR: 89Gk3YiZGWnLsgGygzRg8Shqp1UyEuYGMbnrz3dLX9isbiLb5b8e6Zu4rT6NX5K5dsNtMb1WTyScqdYCsjxNfUFaRLcdeBk
