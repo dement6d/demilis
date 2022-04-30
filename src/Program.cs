@@ -9,19 +9,19 @@ namespace demilis {
         public static bool verbose = false;
         public static bool useApi = false;
         public static bool hideIPs = false;
-
         static string ipInput = "0.0.0.0";
         public static IPAddress ip;
         public static ushort port;
-
         public static Dictionary<int, string> nicknames = new Dictionary<int, string>();
         public static Dictionary<int, TcpClient> dictionary = new Dictionary<int, TcpClient>();
+        public static ArrayList commandHistory = new ArrayList();
         static int socketNumber = 0;
 
         static void Main(string[] args) {
 
              if (HandleArguments() == -1) return;
 
+            Console.Clear();
             Write.Logo();
             Write.Separator();
             Console.ResetColor();
@@ -44,23 +44,26 @@ namespace demilis {
             CommandManager commandManager = new CommandManager();
             while (true)
             {
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.Write("demilis> ");
-                Console.ResetColor();
+                WriteInputPrefix();
                 string input = Console.ReadLine();
+                if (!string.IsNullOrEmpty(input)) commandHistory.Add(input.Trim().ToLower());
 
                 try
                 {
                     if (!String.IsNullOrEmpty(input.Trim()))
                     {
                         Command.Command c = commandManager.GetCommand(input);
-                        c.Execute(GetArgs(input.Substring(c.name.Length)));
+                        if (!string.IsNullOrEmpty(c.alias)
+                        && c.alias == input.Substring(0, c.alias.Length).Trim().ToLower())
+                            c.Execute(GetArgs(input.Substring(c.alias.Length)));
+                        else
+                            c.Execute(GetArgs(input.Substring(c.name.Length)));
                     }
                 }
                 catch (Exception e)
                 {
                     Write.Error($"Invalid command \"{input}\", type \"help\" for a list of available commands");
-                    Write.Error(e.ToString());
+                    if (verbose) Write.Error(e.ToString());
                 }
             }
         }
@@ -77,9 +80,7 @@ namespace demilis {
                         Console.ForegroundColor = ConsoleColor.Red;
                         if (hideIPs) Console.WriteLine($"{Regex.Replace(client.Client.RemoteEndPoint.ToString() + " ", "[0-9]", "*")} connected");
                         else Console.WriteLine($"{client.Client.RemoteEndPoint} connected");
-                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                        Console.Write("demilis> ");
-                        Console.ResetColor();
+                        WriteInputPrefix();
                     }
 
                     dictionary.Add(socketNumber, client);
@@ -219,6 +220,17 @@ namespace demilis {
                 }
             }
             return result;
+        }
+
+        protected static void WriteInputPrefix() {
+            Console.BackgroundColor = ConsoleColor.DarkRed;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Write("demilis");
+            Console.BackgroundColor = ConsoleColor.DarkRed;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(">");
+            Console.ResetColor();
+            Console.Write(" ");
         }
     }
 }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Collections;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace demilis.Command.Commands
 {
@@ -14,6 +9,7 @@ namespace demilis.Command.Commands
         public Session() : base()
         {
             name = "session";
+            alias = "s";
             description = "Interacts with the specified session. Example: 'session 1'";
         }
         public override void Execute(ArrayList args)
@@ -25,7 +21,13 @@ namespace demilis.Command.Commands
                     if (Program.nicknames.ContainsValue(args[0].ToString())) result = Program.nicknames.FirstOrDefault(x => x.Value == args[0].ToString()).Key;
                     if (SessionExists(result))
                     {
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.WriteLine();
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.BackgroundColor = ConsoleColor.DarkRed;
                         Write.Centered($"Interacting with session {result}");
+                        Console.ResetColor();
+                        Console.WriteLine();
                         Program.interacting = true;
                         Interact(result);
                     }

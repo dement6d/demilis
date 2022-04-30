@@ -1,10 +1,5 @@
 ﻿using demilis.Command.Commands;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace demilis
 {
@@ -19,6 +14,7 @@ namespace demilis
             commands.Add(new Exit());
             commands.Add(new Session());
             commands.Add(new Nick());
+            commands.Add(new Clear());
         }
 
         internal Command.Command GetCommand(string input)
@@ -29,10 +25,10 @@ namespace demilis
             {
                 foreach (Command.Command command in commands)
                 {
-                    if (command.name.ToLower() == input.ToLower().Trim() || command.name.ToLower() == input.ToLower().Substring(0, index).ToString())
-                    {
+                    if (command.name.ToLower() == input.ToLower().Trim().Substring(0, index))
                         return command;
-                    }
+                    if (!string.IsNullOrEmpty(command.alias) && command.alias.ToLower() == input.ToLower().Trim().Substring(0, index))
+                        return command;
                 }
             }
             return null;

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using System.Collections;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using IPGeolocation;
 
 namespace demilis.Command.Commands
@@ -17,6 +11,7 @@ namespace demilis.Command.Commands
         public List() : base()
         {
             name = "list";
+            alias = "ls";
             description = "Displays a list of active sessions";
         }
         public override void Execute(ArrayList args)

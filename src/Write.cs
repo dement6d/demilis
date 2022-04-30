@@ -35,15 +35,14 @@ namespace demilis
         internal static void Logo()
         {
             consoleWidth = Console.WindowWidth;
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            if (consoleWidth > ":::::::-.  .,::::::  .        :   ::: :::     ::: .::::::. ".Length)
+            if (consoleWidth > @"   ___  ______  _________   ________".Length)
             {
-                Write.Centered(":::::::-.  .,::::::  .        :   ::: :::     ::: .::::::. ");
-                Write.Centered(" ;;,   `';,;;;;''''  ;;,.    ;;;  ;;; ;;;     ;;;;;;`    ` ");
-                Write.Centered(" `[[     [[ [[cccc   [[[[, ,[[[[, [[[ [[[     [[['[==/[[[[,");
-                Write.Centered("  $$,    $$ $$\"\"\"\"   $$$$$$$$\"$$$ $$$ $$'     $$$  '''    $");
-                Write.Centered("  888_,o8P' 888oo,__ 888 Y88\" 888o888o88oo,.__888 88b    dP");
-                Write.Centered("  MMMMP\"`   \"\"\"\"YUMMMMMM  M'  \"MMMMMM\"\"\"\"YUMMMMMM  \"YMmMY\" ");
+                Write.Centered(@"   ___  ______  _________   ________");
+                Write.Centered(@"  / _ \/ __/  |/  /  _/ /  /  _/ __/");
+                Write.Centered(@" / // / _// /|_/ _/ // /___/ /_\ \  ");
+                Write.Centered(@"/____/___/_/  /_/___/____/___/___/  ");
             }
             else
             {
@@ -62,6 +61,7 @@ namespace demilis
                 separator += ":";
             }
             separator += "\n";
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine(separator);
             Console.ResetColor();
