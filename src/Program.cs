@@ -38,7 +38,7 @@ namespace demilis {
                 return;
             }
 
-            Console.WriteLine($"Listening for incoming TCP connections on {IPAddress.Parse(ipInput)}:{port}");
+            Console.WriteLine($"Listening for incoming TCP connections on {IPAddress.Parse(ipInput)}:{port}\n");
             AcceptConnections(listener);
             CommandManager commandManager = new CommandManager();
             while (true)
