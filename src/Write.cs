@@ -108,5 +108,10 @@ namespace demilis
             Console.WriteLine(text);
             Console.ResetColor();
         }
+
+        public static Func<int, string> MoveLeft = count => $"\x1b[{count}D";
+        public static Func<int, string> MoveRight = count => $"\x1b[{count}C";
+        public static Func<int, string> MoveDown = count => $"\x1b[{count}B";
+        public static Func<int, string> MoveUp = count => $"\x1b[{count}A";
     }
 }

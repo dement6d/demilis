@@ -45,16 +45,16 @@ namespace demilis {
             while (true)
             {
                 WriteInputPrefix();
-                string input = Console.ReadLine();
-                if (!string.IsNullOrEmpty(input)) commandHistory.Add(input.Trim().ToLower());
+                string input = Console.ReadLine().Trim().ToLower();
+                if (!string.IsNullOrEmpty(input)) commandHistory.Add(input);
 
                 try
                 {
-                    if (!String.IsNullOrEmpty(input.Trim()))
+                    if (!String.IsNullOrEmpty(input))
                     {
                         Command.Command c = commandManager.GetCommand(input);
                         if (!string.IsNullOrEmpty(c.alias)
-                        && c.alias == input.Substring(0, c.alias.Length).Trim().ToLower())
+                        && c.alias == input.Substring(0, c.alias.Length).Trim())
                             c.Execute(GetArgs(input.Substring(c.alias.Length)));
                         else
                             c.Execute(GetArgs(input.Substring(c.name.Length)));
@@ -79,8 +79,9 @@ namespace demilis {
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         if (hideIPs) Console.WriteLine($"{Regex.Replace(client.Client.RemoteEndPoint.ToString() + " ", "[0-9]", "*")} connected");
-                        else Console.WriteLine($"{client.Client.RemoteEndPoint} connected");
+                        else Console.WriteLine($"\n{client.Client.RemoteEndPoint} connected");
                         WriteInputPrefix();
+                        Console.Write('*');
                     }
 
                     dictionary.Add(socketNumber, client);
