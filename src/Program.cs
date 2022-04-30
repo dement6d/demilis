@@ -14,7 +14,6 @@ namespace demilis {
         public static ushort port;
         public static Dictionary<int, string> nicknames = new Dictionary<int, string>();
         public static Dictionary<int, TcpClient> dictionary = new Dictionary<int, TcpClient>();
-        public static ArrayList commandHistory = new ArrayList();
         static int socketNumber = 0;
 
         static void Main(string[] args) {
@@ -45,8 +44,8 @@ namespace demilis {
             while (true)
             {
                 WriteInputPrefix();
-                string input = Console.ReadLine().Trim().ToLower();
-                if (!string.IsNullOrEmpty(input)) commandHistory.Add(input);
+                string input = ReadLine.Read().Trim().ToLower();
+                if (!string.IsNullOrEmpty(input)) ReadLine.AddHistory(input);
 
                 try
                 {

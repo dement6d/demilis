@@ -21,6 +21,7 @@ namespace demilis.Command.Commands
                     if (Program.nicknames.ContainsValue(args[0].ToString())) result = Program.nicknames.FirstOrDefault(x => x.Value == args[0].ToString()).Key;
                     if (SessionExists(result))
                     {
+                        ReadLine.ClearHistory();
                         Console.BackgroundColor = ConsoleColor.Black;
                         Console.WriteLine();
                         Console.ForegroundColor = ConsoleColor.Black;
@@ -54,10 +55,12 @@ namespace demilis.Command.Commands
                 NetworkStream stream = Program.dictionary[session].GetStream();
                 while (true)
                 {
-                    string input = Console.ReadLine();
+                    string input = ReadLine.Read().Trim();
+                    if (!string.IsNullOrEmpty(input)) ReadLine.AddHistory(input);
 
                     if (input.Trim() == "exit")
                     {
+                        ReadLine.ClearHistory();
                         Program.interacting = false;
                         break;
                     }

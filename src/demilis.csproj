@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="IpGeoLocation.IpGeoLocation" Version="1.0.9" />
+    <PackageReference Include="ReadLine" Version="2.0.1" />
     <PackageReference Include="System.Collections.NonGeneric" Version="4.3.0" />
   </ItemGroup>
 
