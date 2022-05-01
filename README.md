@@ -19,6 +19,10 @@
   </a>
 </p>
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/93228501/166127907-dec4aba2-5f68-47bd-a8bc-57dc691a8ea0.png"/>
+</p>
+
 # Installation (Windows)
 1. Download the repository [here](https://github.com/dement6d/demilis/archive/refs/heads/main.zip) OR clone it with `git clone https://github.com/dement6d/demilis.git`
 2. If you downloaded the repository from [here](https://github.com/dement6d/demilis/archive/refs/heads/main.zip), extract it to a folder using [7zip](https://sourceforge.net/projects/sevenzip/files/7-Zip/) or another preferred method
