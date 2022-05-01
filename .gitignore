@@ -3,3 +3,5 @@ src/bin/
 src/obj/
 README.md
 push.sh
+mkrelease.sh
+v*/
