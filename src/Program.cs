@@ -122,7 +122,7 @@ namespace demilis {
                 verbose = true;
             }
             // SET USE-API FROM ARGUMENT
-            if (Environment.GetCommandLineArgs().Contains("--use-api", StringComparer.OrdinalIgnoreCase) || Environment.GetCommandLineArgs().Contains("-ua", StringComparer.OrdinalIgnoreCase))
+            if (Environment.GetCommandLineArgs().Contains("--show-location", StringComparer.OrdinalIgnoreCase) || Environment.GetCommandLineArgs().Contains("-sl", StringComparer.OrdinalIgnoreCase))
             {
                 useApi = true;
             }
