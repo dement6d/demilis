@@ -61,7 +61,6 @@ namespace demilis
                 separator += ":";
             }
             separator += "\n";
-            Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine(separator);
             Console.ResetColor();
