@@ -223,12 +223,12 @@ namespace demilis {
         }
 
         protected static void WriteInputPrefix() {
-            Console.BackgroundColor = ConsoleColor.DarkRed;
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Write(" demilis ");
+            Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.Write("demilis");
-            Console.BackgroundColor = ConsoleColor.DarkRed;
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write(">");
+            Console.Write("");
             Console.ResetColor();
             Console.Write(" ");
         }
