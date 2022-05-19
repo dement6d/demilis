@@ -5,3 +5,4 @@ README.md
 push.sh
 mkrelease.sh
 v*/
+.vscode/
